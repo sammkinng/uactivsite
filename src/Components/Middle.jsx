@@ -12,6 +12,9 @@ import { detectorConfig, model } from '../constants/model';
 
 
 const Middle = () => {
+  const sendDataToReactNativeApp = async (txt) => {
+    window.ReactNativeWebView.postMessage(txt);
+  };
   const [allowed, setAllowed] = useState(0)
   const {
     setRep,
@@ -24,14 +27,6 @@ const Middle = () => {
     setCompleted,
     setStart
   } = useContext(Context)
-  useEffect(() => {
-    window.addEventListener("message", message => {
-      alert('called')
-      setExercise(0)
-      setStart(true)
-      alert(message.data)
-    })
-  }, [])
   useEffect(() => {
     let camera = null
     let unsubscribe = null
@@ -105,12 +100,7 @@ const Middle = () => {
     document.getElementById('btn').addEventListener("click", e => {
       // console.log('click')
       loader()
-      setTimeout(() => {
-        // alert('time up')
-        console.log('time up')
-        // setExercise(0)
-        // setStart(true)
-      }, 5000)
+      sendDataToReactNativeApp('modal')
     })
     // loader()
     return (() => {
@@ -121,12 +111,7 @@ const Middle = () => {
   }, [completed, exercise, start])
   return (
     <div className="middle">
-      <button style={{
-        position: 'absolute',
-        top: 50,
-        left: 100
-      }}
-        id={'btn'}>click</button>
+      <button id={'btn'}>Click</button>
       <div className="canvas-wrapper" style={{ position: 'relative' }}>
         <canvas id="output"></canvas>
         <video id="view" playsInline>

@@ -10,6 +10,7 @@
   overflow-y: hidden;
   background-color: #00b8af;
 }
+
 .middle-pop {
   border-radius: 20px;
   width: 400px;
@@ -19,8 +20,9 @@
   left: 0;
   right: 0;
   margin: auto;
-  
+
 }
+
 .middle-pop img {
   position: relative;
   top: -30px;
@@ -29,6 +31,7 @@
   width: 70px;
   height: 70px;
 }
+
 .middle-pop p {
   padding: 5px 30px;
   font-size: 30px;
@@ -40,7 +43,7 @@
   transform: translateY(-50%);
 }
 
-#view{
+#view {
   visibility: hidden;
   height: 100vh;
   margin: 0;
@@ -50,17 +53,18 @@
   top: 0;
   transform: translateX(-50%);
 }
-#output{
+
+#output {
   height: 100vh;
   margin: 0;
   position: absolute;
-  top:0;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   /* transform: translateX(-50%) scaleX(-1); */
 }
 
-#green{
+#green {
   height: 100vh;
   width: 1100px;
   margin: 0;
@@ -71,13 +75,14 @@
   background-color: transparent;
   box-sizing: border-box;
 }
-#countdown{
+
+#countdown {
   display: none;
   z-index: 10;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 
 .counter {
@@ -95,11 +100,11 @@
 
 @keyframes hide {
   0% {
-      transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
   }
 
   100% {
-      transform: translate(-50%, -50%) scale(0);
+    transform: translate(-50%, -50%) scale(0);
   }
 }
 
@@ -117,83 +122,95 @@
 
 @keyframes show {
   0% {
-      transform: translate(-50%, -50%) scale(0);
+    transform: translate(-50%, -50%) scale(0);
   }
 
   80% {
-      transform: translate(-50%, -50%) scale(1.4);
+    transform: translate(-50%, -50%) scale(1.4);
   }
 
   100% {
-      transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 
 .nums {
-color: #00b8af;
-position: relative;
-font-size: 250px;
-overflow: hidden;
-width: 500px;
-height: 250px;
+  color: #00b8af;
+  position: relative;
+  font-size: 250px;
+  overflow: hidden;
+  width: 500px;
+  height: 250px;
 }
 
 .nums span {
-position: absolute;
-left: 50%;
-top: 50%;
-transform: translate(-50%, -50%) rotate(120deg);
-transform-origin: bottom center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(120deg);
+  transform-origin: bottom center;
 }
 
 .nums span.in {
   transform: translate(-50%, -50%) rotate(0deg);
-animation: goIn .25s ease-in-out;
+  animation: goIn .25s ease-in-out;
 }
 
 .nums span.out {
-animation: goOut .25s ease-in-out;
+  animation: goOut .25s ease-in-out;
 }
 
 @keyframes goIn {
-0% {
-  transform: translate(-50%, -50%) rotate(120deg);
-}
-30% {
-  transform: translate(-50%, -50%) rotate(-20deg);
-}
+  0% {
+    transform: translate(-50%, -50%) rotate(120deg);
+  }
 
-60% {
-  transform: translate(-50%, -50%) rotate(10deg);
-}
+  30% {
+    transform: translate(-50%, -50%) rotate(-20deg);
+  }
 
-90%, 100% {
-  transform: translate(-50%, -50%) rotate(0deg);
-}
+  60% {
+    transform: translate(-50%, -50%) rotate(10deg);
+  }
+
+  90%,
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
 
 }
 
 @keyframes goOut {
-0%, 30% {
-  transform: translate(-50%, -50%) rotate(0deg);
-}
 
-60% {
-  transform: translate(-50%, -50%) rotate(20deg);
-}
+  0%,
+  30% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
 
-100% {
-  transform: translate(-50%, -50%) rotate(-120deg);
-}
+  60% {
+    transform: translate(-50%, -50%) rotate(20deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(-120deg);
+  }
 }
 
 .hs1 {
-font-size: 50px;
-margin: 50px;
-text-transform: uppercase;
+  font-size: 50px;
+  margin: 50px;
+  text-transform: uppercase;
 }
-.hs2{
+
+.hs2 {
   font-size: 200px;
   text-transform: uppercase;
 }
 
+#btn {
+  width: 100px;
+  height: 50px;
+  font-size: 24px;
+  font-family: 'serif';
+  border-radius: 3px;
+}

@@ -12,8 +12,8 @@ export default () => {
   const [rep, setRep] = useState(0);
   const [speed, setSpeed] = useState(0);
   const [completed, setCompleted] = useState(false);
-  const [exercise, setExercise] = useState(null);
-  const [start, setStart] = useState(false);
+  const [exercise, setExercise] = useState(0);
+  const [start, setStart] = useState(true);
   return (
     <Context.Provider
       value={{
