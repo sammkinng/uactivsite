@@ -10,11 +10,11 @@ import '../Styles/Middle.css';
 
 import { detectorConfig, model } from '../constants/model';
 
+export const sendDataToReactNativeApp = async (txt) => {
+  window.ReactNativeWebView.postMessage(txt);
+}
 
 const Middle = () => {
-  const sendDataToReactNativeApp = async (txt) => {
-    window.ReactNativeWebView.postMessage(txt);
-  };
   const [allowed, setAllowed] = useState(0)
   const {
     setRep,

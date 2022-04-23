@@ -18,6 +18,8 @@ import {
 
 import HKEnd from '../Assets/Sound/high_knees/HIGH KNEES_end.mp3'
 
+import { sendDataToReactNativeApp } from '../Components/Middle';
+
 export class Camera {
     constructor() {
         this.video = document.getElementById('view');
@@ -296,6 +298,7 @@ export class Camera {
     }
     //updates rep count and speed in ui
     update_values = (count, ex) => {
+        sendDataToReactNativeApp(count)
         this.exercise_count = count
         let time_taken = new Date().getTime() - this.start_time
         this.setRep(this.exercise_count)
