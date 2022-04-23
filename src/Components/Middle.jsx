@@ -109,6 +109,11 @@ const Middle = () => {
       cancelAnimationFrame(unsubscribe)
     })
   }, [completed, exercise, start])
+  useEffect(() => {
+    window.addEventListener("message", message => {
+      alert(message.data)
+    });
+  }, [])
   return (
     <div className="middle">
       <button id={'btn'}>Click</button>
