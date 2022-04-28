@@ -18,7 +18,7 @@ import {
 
 import HKEnd from '../Assets/Sound/high_knees/HIGH KNEES_end.mp3'
 
-import { sendDataToReactNativeApp } from '../Components/Middle';
+import { sendDataToReactNativeApp } from '../App';
 
 export class Camera {
     constructor() {
@@ -298,17 +298,37 @@ export class Camera {
     }
     //updates rep count and speed in ui
     update_values = (count, ex) => {
-        sendDataToReactNativeApp(count)
+        // sendDataToReactNativeApp(count)
         this.exercise_count = count
         let time_taken = new Date().getTime() - this.start_time
-        this.setRep(this.exercise_count)
+        // this.setRep(this.exercise_count)
         if (time_taken) {
             // console.log(time_taken, count)
-            this.setSpeed(((1000 * count) / time_taken).toFixed(2))
+            let speed = ((1000 * count) / time_taken).toFixed(2)
+            // this.setSpeed(speed)
+            sendDataToReactNativeApp({
+                type: 'reps',
+                data: {
+                    rep: count,
+                    speed: speed
+                }
+            })
+        }
+        else {
+            sendDataToReactNativeApp({
+                type: 'reps',
+                data: {
+                    rep: count,
+                    speed: 0
+                }
+            })
         }
         if (count === data[ex].reps) {
-            this.setCompleted(true)
-            new Audio(HKEnd).play()
+            sendDataToReactNativeApp({
+                type: 'completed',
+            })
+            // this.setCompleted(true)
+            // new Audio(HKEnd).play()
         }
     }
     // switch bw exercises
