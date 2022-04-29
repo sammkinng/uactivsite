@@ -1,7 +1,3 @@
-import second from '../images/jumping.gif';
-import first from '../images/high_knees.gif';
-import third from '../images/squats.gif';
-
 import HKintro from '../../Assets/Sound/high_knees/HIGH KNEES_Intro.mp3'
 import HKSCM from '../../Assets/Sound/high_knees/high-knees-start_countdown_merged.mp3'
 
@@ -14,7 +10,7 @@ import SStart from '../../Assets/Sound/squats/SQUAT_start.mp3'
 const data = [
   {
     text: 'High Knees',
-    image: first,
+    // image: first,
     description: [
       'Make sure your full body is in the camera frame',
       'Face the camera',
@@ -27,7 +23,7 @@ const data = [
   },
   {
     text: 'Jumping Jacks',
-    image: second,
+    // image: second,
     description: [
       'Make sure your full body is in the camera frame',
       'Face the camera',
@@ -40,7 +36,7 @@ const data = [
   },
   {
     text: 'Squats',
-    image: third,
+    // image: third,
     description: [
       'Make sure your full body is in the camera frame',
       ' Turn to your left or right, so your profile is visible to the camera',

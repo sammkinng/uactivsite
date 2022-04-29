@@ -16,7 +16,7 @@ import {
     exercises
 } from '../constants/model';
 
-import HKEnd from '../Assets/Sound/high_knees/HIGH KNEES_end.mp3'
+// import HKEnd from '../Assets/Sound/high_knees/HIGH KNEES_end.mp3'
 
 import { sendDataToReactNativeApp } from '../App';
 
@@ -35,17 +35,7 @@ export class Camera {
         this.countdown_end = false
     }
 
-    static async setupCamera(
-        setRep,
-        setSpeed,
-        setPlaying,
-        playing,
-        setCompleted,
-        setAnimation
-    ) {
-        // let l = document.querySelector('.left').offsetWidth
-        // let r = document.querySelector('.right').offsetWidth
-        // let w = window.innerWidth
+    static async setupCamera(exercise) {
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
             throw new Error(
                 'Browser API navigator.mediaDevices.getUserMedia not available');
@@ -54,14 +44,8 @@ export class Camera {
         let stream = null
         try {
             stream = await navigator.mediaDevices.getUserMedia(videoConfig);
-            // alert(stream)
             const camera = new Camera();
-            camera.setRep = setRep
-            camera.setSpeed = setSpeed
-            camera.setPlaying = setPlaying
-            camera.playing = playing
-            camera.setCompleted = setCompleted
-            camera.setAnimation = setAnimation
+
             camera.video.srcObject = stream;
 
             await new Promise((resolve) => {
@@ -90,9 +74,13 @@ export class Camera {
             camera.ctx.translate(camera.video.videoWidth, 0);
             camera.ctx.scale(-1, 1);
 
+            camera.playing = data[exercise].audio
+            camera.playing.play()
+
             return camera;
         } catch (error) {
             alert(error)
+            console.log(error, 4)
             throw 'Permission Error'
         }
     }
@@ -224,7 +212,6 @@ export class Camera {
             let nose = coordinates[body.nose]
 
             if ((right_ankle.score > scoreThreshold || left_ankle.score > scoreThreshold) && nose.score > scoreThreshold) {
-                // document.getElementById('green').style.border = "5px solid green"
                 if (!this.start_played) {
                     this.countdownAudio(ex)
                 }
@@ -240,7 +227,8 @@ export class Camera {
             // document.getElementById('green').style.border = "none"
             return false
         } catch (error) {
-            console.log(error)
+            console.log(error, 5)
+            alert(error)
         }
     }
     // initial audio + countdwon animation
@@ -251,7 +239,7 @@ export class Camera {
             this.playing.currentTime = 0
         }
         audio.play()
-        this.setPlaying(audio)
+        this.playing = audio
         this.start_played = true
         const nums = document.querySelectorAll('.nums span');
         const counter = document.querySelector('.counter');
@@ -290,11 +278,11 @@ export class Camera {
                 });
             });
         }
-        let an = setTimeout(() => {
+        setTimeout(() => {
             cc.style.display = 'inline-block'
             runAnimation()
         }, data[ex].aud2len)
-        this.setAnimation(an)
+        // this.setAnimation(an)
     }
     //updates rep count and speed in ui
     update_values = (count, ex) => {
@@ -407,14 +395,6 @@ export class Camera {
         let profile = left_wrist.x > left_shoulder.x ? 'right' : 'left'
         let left_wrist_shoulder_ankle_angle = this.getAngle(left_wrist, left_shoulder, left_ankle)
         let right_wrist_shoulder_ankle_angle = this.getAngle(right_wrist, right_shoulder, right_ankle)
-
-        // let left_wrist_shoulder_knee_angle = this.getAngle(left_wrist, left_shoulder, left_knee)
-        // let right_wrist_shoulder_knee_angle = this.getAngle(right_wrist, right_shoulder, right_knee)
-        // let left_wrist_shoulder_knee_angle = Math.abs(this.getAngle(left_wrist, left_shoulder, left_knee) - 360)
-        // console.log(right_wrist_shoulder_knee_angle, left_wrist_shoulder_knee_angle)
-        // let straight_left_hand_condn = Math.abs(left_shoulder.y - left_wrist.y) <= correction
-        // let straight_right_hand_condn = Math.abs(right_shoulder.y - right_wrist.y) <= correction
-        // let straight_hands_condn = (left_wrist_shoulder_knee_angle >= 45 && left_wrist_shoulder_knee_angle <= 65) || (right_wrist_shoulder_knee_angle >= 45 && right_wrist_shoulder_knee_angle <= 65)
 
         let straight_hands_condn = profile === 'left' ?
             ((left_wrist_shoulder_ankle_angle >= 260 && left_wrist_shoulder_ankle_angle <= 280) ||
