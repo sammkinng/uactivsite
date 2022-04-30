@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect } from "react";
 
 import * as posedetection from '@tensorflow-models/pose-detection';
 import '@tensorflow/tfjs-core';
@@ -9,8 +9,6 @@ import { Camera } from './utils/camera';
 
 import './App.css';
 
-import data from "./Assets/Json/Text";
-
 import { detectorConfig, model } from './constants/model';
 
 export const sendDataToReactNativeApp = async (txt) => {
@@ -18,9 +16,8 @@ export const sendDataToReactNativeApp = async (txt) => {
 }
 
 export default () => {
-  const loader = async (exercise) => {
+  const startModel = async (exercise) => {
     let camera = null
-    // let unsubscribe=null
     try {
       const createDetector = async () => {
         return posedetection.createDetector(model, detectorConfig);
@@ -60,7 +57,7 @@ export default () => {
         await renderResult();
         requestAnimationFrame(renderPrediction);
       };
-      camera = await Camera.setupCamera(exercise)
+      camera = await Camera.setupCamera()
       var detector = await createDetector()
       renderPrediction()
     } catch (error) {
@@ -68,21 +65,22 @@ export default () => {
       alert(error)
     }
   }
-
   useEffect(() => {
     window.addEventListener("message", message => {
       let val = message.data
       if (val.type === 'exercise') {
-        loader(val.data.index)
+        // document.getElementById('output').click()
+        startModel(val.data.index)
       }
       else {
         console.log(val.type, 3)
         alert(val.type)
       }
     });
+    // startModel(0)
     // setTimeout(() => {
-    //   console.log('time')
-    //   loader(0)
+    //   // console.log('time')
+    //   startModel(0)
     // }, 5000)
   }, [])
   return (

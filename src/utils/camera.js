@@ -17,6 +17,7 @@ import {
 } from '../constants/model';
 
 // import HKEnd from '../Assets/Sound/high_knees/HIGH KNEES_end.mp3'
+// import Beep from './beep.mp3'
 
 import { sendDataToReactNativeApp } from '../App';
 
@@ -35,7 +36,7 @@ export class Camera {
         this.countdown_end = false
     }
 
-    static async setupCamera(exercise) {
+    static async setupCamera() {
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
             throw new Error(
                 'Browser API navigator.mediaDevices.getUserMedia not available');
@@ -53,7 +54,7 @@ export class Camera {
                     resolve(video);
                 };
             });
-
+            // alert('hello')
             camera.video.play();
 
             const videoWidth = camera.video.videoWidth;
@@ -63,7 +64,6 @@ export class Camera {
             camera.video.height = videoHeight;
 
             //setting size of full body validator
-            // document.querySelector('#green').style.width = (w - l - r - 2.5) + 'px'
 
             camera.canvas.width = videoWidth;
             camera.canvas.height = videoHeight;
@@ -74,14 +74,15 @@ export class Camera {
             camera.ctx.translate(camera.video.videoWidth, 0);
             camera.ctx.scale(-1, 1);
 
-            camera.playing = data[exercise].audio
-            camera.playing.play()
+            // camera.playing = data[exercise].audio
+            // camera.playing.play()
+            // new Audio(Beep).play()
 
             return camera;
         } catch (error) {
             alert(error)
             console.log(error, 4)
-            throw 'Permission Error'
+            // throw 'Permission Error'
         }
     }
 
@@ -234,12 +235,12 @@ export class Camera {
     // initial audio + countdwon animation
     countdownAudio = (ex) => {
         let audio = data[ex].aud2
-        if (this.playing) {
-            this.playing.pause()
-            this.playing.currentTime = 0
-        }
+        // if (this.playing) {
+        //     this.playing.pause()
+        //     this.playing.currentTime = 0
+        // }
         audio.play()
-        this.playing = audio
+        // this.playing = audio
         this.start_played = true
         const nums = document.querySelectorAll('.nums span');
         const counter = document.querySelector('.counter');
