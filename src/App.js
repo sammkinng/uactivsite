@@ -59,7 +59,13 @@ export default () => {
       };
       camera = await Camera.setupCamera()
       var detector = await createDetector()
+      // console.log('camera')
+      // alert('camera')
+
       renderPrediction()
+      setTimeout(() => sendDataToReactNativeApp({
+        type: 'camera'
+      }), 2000)
     } catch (error) {
       console.log(error, 2)
       alert(error)
@@ -69,7 +75,6 @@ export default () => {
     window.addEventListener("message", message => {
       let val = message.data
       if (val.type === 'exercise') {
-        // document.getElementById('output').click()
         startModel(val.data.index)
       }
       else {
@@ -77,11 +82,6 @@ export default () => {
         alert(val.type)
       }
     });
-    // startModel(0)
-    // setTimeout(() => {
-    //   // console.log('time')
-    //   startModel(0)
-    // }, 5000)
   }, [])
   return (
     <div className="middle">
