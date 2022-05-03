@@ -75,6 +75,7 @@ export default () => {
     window.addEventListener("message", message => {
       let val = message.data
       if (val.type === 'exercise') {
+        console.log('exercise')
         startModel(val.data.index)
       }
       else {
